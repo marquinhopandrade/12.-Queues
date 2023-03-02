@@ -26,7 +26,25 @@ while (queue.Count > 0)
     {
         static void Main(string[] args)
         {
-
+            Queue<Order> ordersQueue = new Queue<Order>();
+            foreach(Order o in ReceiveOrdersFromBranch1()) 
+            {
+                //add each order to the queue
+                ordersQueue.Enqueue(o);
+            }
+            foreach (Order o in ReceiveOrdersFromBranch2())
+            {
+                //add each order to the queue
+                ordersQueue.Enqueue(o);
+            }
+            while (ordersQueue.Count > 0)
+            {
+                //remove the order at the front of the queue and store it in a variable called currentOrder
+                Order currentOrder = ordersQueue.Dequeue();
+                //process the order
+                currentOrder.ProcessOrder();
+            }
+;
         }
 
         static Order[] ReceiveOrdersFromBranch1()
